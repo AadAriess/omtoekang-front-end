@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -41,6 +41,7 @@ import {
 } from "react-icons/bs";
 import Link from "next/link";
 import styles from "../components/Slider.module.css";
+import RevealOnScroll from "../components/RevealOnScroll";
 import Image from "next/image";
 
 interface TestimonialData {
@@ -139,30 +140,27 @@ export default function Page() {
   };
 
   useEffect(() => {
-    // Durasi animasi yang konsisten (sesuai dengan Tailwind CSS)
-    const animationDuration = 700; // Contoh: duration-700
-    const smallDelay = 200; // Jeda kecil antar step animasi
+    const animationDuration: number = 700;
+    const smallDelay: number = 200;
 
     // 1. Navbar muncul duluan
     setIsNavbarVisible(true);
 
     // 2. Teks intro (#1 Toekang, Pilih Sendiri, Paragraf, dan Tombol)
-    // Dimulai setelah navbar selesai + jeda kecil
-    const introTextAndButtonsRevealDelay = animationDuration + smallDelay;
+    const introTextAndButtonsRevealDelay: number =
+      animationDuration + smallDelay;
     const introTextAndButtonsTimer = setTimeout(() => {
       setIsIntroTextAndButtonsVisible(true);
     }, introTextAndButtonsRevealDelay);
 
     // 3. Gambar banner muncul
-    // Dimulai setelah navbar selesai + sedikit jeda (bisa disesuaikan agar pas dengan teks intro)
-    const imageRevealDelay = animationDuration + smallDelay / 2;
+    const imageRevealDelay: number = animationDuration + smallDelay / 2;
     const imageTimer = setTimeout(() => {
       setIsImageVisible(true);
     }, imageRevealDelay);
 
     // 4. Bullet points
-    // Dimulai setelah teks intro dan tombol selesai animasinya + jeda lagi
-    const bulletPointsRevealDelay =
+    const bulletPointsRevealDelay: number =
       introTextAndButtonsRevealDelay + animationDuration + smallDelay;
     const bulletPointsTimer = setTimeout(() => {
       setIsBulletPointsVisible(true);
@@ -172,7 +170,7 @@ export default function Page() {
     return () => {
       clearTimeout(introTextAndButtonsTimer);
       clearTimeout(bulletPointsTimer);
-      clearTimeout(imageTimer); // Bersihkan timer gambar juga
+      clearTimeout(imageTimer);
     };
   }, []);
 
@@ -183,7 +181,7 @@ export default function Page() {
       <Navbar
         fluid
         rounded
-        className={`fixed top-0 z-50 w-full transform !bg-white py-4 shadow-lg transition-transform duration-700 ease-out ${
+        className={`fixed top-0 z-50 w-full transform !bg-white py-4 shadow-lg transition-transform duration-1000 ease-out ${
           isNavbarVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -403,7 +401,7 @@ export default function Page() {
       </Navbar>
       {/* The Card component added here */}
       <div
-        className={`mt-32 ml-12.5 box-border h-10 w-73 transform rounded-lg bg-gray-800 px-2 py-1 transition-all duration-700 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} `}
+        className={`mt-32 ml-12.5 box-border h-10 w-73 transform rounded-lg bg-gray-800 px-2 py-1 transition-all duration-1000 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} `}
       >
         <h5 className="text-left text-lg font-bold tracking-tight text-white">
           #1 Toekang Terpercaya di Kotamu
@@ -419,7 +417,7 @@ export default function Page() {
           {/* Konten Kiri (Left Content Area) */}
           <div>
             <div
-              className={`transform transition-all duration-700 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`transform transition-all duration-1000 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               <h3 className="mb-4 text-5xl font-extrabold text-gray-900">
                 Pilih Sendiri,
@@ -429,7 +427,7 @@ export default function Page() {
               </h3>
             </div>
             <div
-              className={`transform text-lg text-gray-700 transition-all duration-700 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} `}
+              className={`transform text-lg text-gray-700 transition-all duration-1000 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} `}
             >
               <p className="mb-6 text-lg text-gray-700">
                 Tim tukang profesional kami siap bantu semua kebutuhan perbaikan
@@ -437,7 +435,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className={`mb-2 flex transform items-center gap-2 transition-all duration-700 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`mb-2 flex transform items-center gap-2 transition-all duration-1000 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -458,7 +456,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className={`mb-2 flex transform items-center gap-2 transition-all duration-700 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`mb-2 flex transform items-center gap-2 transition-all duration-1000 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               {" "}
               {/* Kontainer flex untuk ikon dan teks */}
@@ -481,7 +479,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className={`mb-2 flex transform items-center gap-2 transition-all duration-700 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`mb-2 flex transform items-center gap-2 transition-all duration-1000 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               {" "}
               {/* Kontainer flex untuk ikon dan teks */}
@@ -504,7 +502,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className={`mb-2 flex transform items-center gap-2 transition-all duration-700 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`mb-2 flex transform items-center gap-2 transition-all duration-1000 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               {" "}
               {/* Kontainer flex untuk ikon dan teks */}
@@ -527,7 +525,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className={`mb-2 flex transform items-center gap-2 transition-all duration-700 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`mb-2 flex transform items-center gap-2 transition-all duration-1000 ease-out ${isBulletPointsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               {" "}
               {/* Kontainer flex untuk ikon dan teks */}
@@ -550,7 +548,7 @@ export default function Page() {
               </p>
             </div>
             <div
-              className={`mt-10 ml-12.5 grid transform grid-cols-1 gap-8 transition-all duration-700 ease-out md:grid-cols-2 ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`mt-10 ml-12.5 grid transform grid-cols-1 gap-8 transition-all duration-1000 ease-out md:grid-cols-2 ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               {/* Konten Kiri (Left Content Area) */}
               <div>
@@ -583,7 +581,7 @@ export default function Page() {
           </div>
           {/* Konten Kanan (Right Content Area) */}
           <div
-            className={`transform transition-all duration-700 ease-out ${isImageVisible ? "animate-float translate-x-0 opacity-100" : "translate-x-full opacity-0"} `}
+            className={`transform transition-all duration-1000 ease-out ${isImageVisible ? "animate-float translate-x-0 opacity-100" : "translate-x-full opacity-0"} `}
           >
             <img
               src="/engineer_banner.jpg"
@@ -598,781 +596,928 @@ export default function Page() {
       <div className="mx-auto mt-40 flex w-full flex-col items-center justify-center px-4">
         <div className="mb-8">
           {" "}
-          <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
-            <span className="flex items-center gap-x-2 text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
-                />
-              </svg>
-              Berdiri sejak 2025
-            </span>
-          </div>
+          <RevealOnScroll>
+            <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
+              <span className="flex items-center gap-x-2 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                  />
+                </svg>
+                Berdiri sejak 2025
+              </span>
+            </div>
+          </RevealOnScroll>
         </div>
 
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center text-center">
-          <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
-            Kenapa Pilih Jasa Tukang OmToekang?
-          </h3>
-          <p className="mt-4 max-w-2xl text-lg text-gray-700">
-            Bukan sekadar benerin atau masang doang, bro/sis. Ini lebih ke soal
-            bikin hati tenang, hasilnya mantap jiwa, plus kamu bisa pilih
-            sendiri tukang yang pas banget sama maumu. Intinya, kami ada buat
-            bikin urusan rumahmu beres total tanpa pusing!
-          </p>
+          <RevealOnScroll direction="up">
+            {" "}
+            {/* Gunakan direction="up" di sini */}
+            <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
+              Kenapa Pilih Jasa Tukang OmToekang?
+            </h3>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up">
+            <p className="mt-4 max-w-2xl text-lg text-gray-700">
+              Bukan sekadar benerin atau masang doang, bro/sis. Ini lebih ke
+              soal bikin hati tenang, hasilnya mantap jiwa, plus kamu bisa pilih
+              sendiri tukang yang pas banget sama maumu. Intinya, kami ada buat
+              bikin urusan rumahmu beres total tanpa pusing!
+            </p>
+          </RevealOnScroll>
         </div>
       </div>
       {/* Konten Utama (Main Conten Area) 3 */}
       <div className="mx-auto mt-10 grid max-w-screen-xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {/* Konten 1 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
-          <img src="/deadline.png" alt="Icon 1" className="mb-4 h-16 w-16" />
-          <h3 className="mb-2 text-xl font-bold text-gray-900">
-            Cepat & Andal
-          </h3>
-          <p className="text-gray-700">
-            Butuh cepet? Tukang kami gercep di lokasi. Beres tuntas, gak pake
-            lama!
-          </p>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={0}
+        >
+          <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
+            <img src="/deadline.png" alt="Icon 1" className="mb-4 h-16 w-16" />
+            <h3 className="mb-2 text-xl font-bold text-gray-900">
+              Cepat & Andal
+            </h3>
+            <p className="text-gray-700">
+              Butuh cepet? Tukang kami gercep di lokasi. Beres tuntas, gak pake
+              lama!
+            </p>
+          </div>
+        </RevealOnScroll>
 
         {/* Konten 2 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
-          <img src="/surveyor.png" alt="Icon 2" className="mb-4 h-16 w-16" />
-          <h3 className="mb-2 text-xl font-bold text-gray-900">
-            Gratis Survei & Estimasi
-          </h3>
-          <p className="text-gray-700">
-            Galau soal biaya? Tenang! Kami survei gratis ke tempatmu. Harga
-            transparan, anti biaya siluman.
-          </p>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={200}
+        >
+          {" "}
+          {/* Durasi 1s, delay 200ms */}
+          <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
+            <img src="/surveyor.png" alt="Icon 2" className="mb-4 h-16 w-16" />
+            <h3 className="mb-2 text-xl font-bold text-gray-900">
+              Gratis Survei & Estimasi
+            </h3>
+            <p className="text-gray-700">
+              Galau soal biaya? Tenang! Kami survei gratis ke tempatmu. Harga
+              transparan, anti biaya siluman.
+            </p>
+          </div>
+        </RevealOnScroll>
 
         {/* Konten 3 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
-          <img src="/money-bag.png" alt="Icon 3" className="mb-4 h-16 w-16" />
-          <h3 className="mb-2 text-xl font-bold text-gray-900">
-            Harga Bersahabat
-          </h3>
-          <p className="text-gray-700">
-            Dompet aman! Mulai dari [Rp. XX.XXX] buat [jenis pekerjaan kecil,
-            misal: benerin keran]. Kualitas oke, harga asyik.
-          </p>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={400}
+        >
+          {" "}
+          {/* Durasi 1s, delay 400ms */}
+          <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
+            <img src="/money-bag.png" alt="Icon 3" className="mb-4 h-16 w-16" />
+            <h3 className="mb-2 text-xl font-bold text-gray-900">
+              Harga Bersahabat
+            </h3>
+            <p className="text-gray-700">
+              Dompet aman! Mulai dari Rp. 50.000 buat ... Kualitas oke, harga
+              asyik.
+            </p>
+          </div>
+        </RevealOnScroll>
 
         {/* Konten 4 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
-          <img
-            src="/employee-insurance.png"
-            alt="Icon 4"
-            className="mb-4 h-16 w-16"
-          />
-          <h3 className="mb-2 text-xl font-bold text-gray-900">
-            Garansi Pekerjaan
-          </h3>
-          <p className="text-gray-700">
-            Kerjaan dijamin beres! Kalau ada apa-apa, kami siap benerin lagi
-            gratis. Kamu puas, kami senang.
-          </p>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={600}
+        >
+          {" "}
+          {/* Durasi 1s, delay 600ms */}
+          <div className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-lg">
+            <img
+              src="/employee-insurance.png"
+              alt="Icon 4"
+              className="mb-4 h-16 w-16"
+            />
+            <h3 className="mb-2 text-xl font-bold text-gray-900">
+              Garansi Pekerjaan
+            </h3>
+            <p className="text-gray-700">
+              Kerjaan dijamin beres! Kalau ada apa-apa, kami siap benerin lagi
+              gratis. Kamu puas, kami senang.
+            </p>
+          </div>
+        </RevealOnScroll>
       </div>
       {/* Konten Utama (Main Conten Area) 4 */}
       <div className="mx-auto mt-40 flex w-full flex-col items-center justify-center px-4">
         <div className="mb-8">
           {" "}
-          <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
-            <span className="flex items-center gap-x-2 text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
-              Layanan Unggulan Kami
-            </span>
-          </div>
+          <RevealOnScroll>
+            <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
+              <span className="flex items-center gap-x-2 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+                Layanan Unggulan Kami
+              </span>
+            </div>
+          </RevealOnScroll>
         </div>
 
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center text-center">
-          <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
-            Layanan Tukang Andal OmToekang
-          </h3>
-          <p className="mt-4 max-w-2xl text-lg text-gray-700">
-            Gak ada lagi pusing-pusing cari tukang sana-sini.
-          </p>
+          <RevealOnScroll direction="up">
+            <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
+              Layanan Tukang Andal OmToekang
+            </h3>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up">
+            <p className="mt-4 max-w-2xl text-lg text-gray-700">
+              Gak ada lagi pusing-pusing cari tukang sana-sini.
+            </p>
+          </RevealOnScroll>
         </div>
       </div>
       {/* Konten Utama (Main Conten Area) 5 */}
       <div className="mx-auto mt-10 grid max-w-screen-xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {/* Konten 1 */}
-        <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
-          {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
-          <div>
-            {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
-            <div className="mb-4 flex items-center space-x-4">
-              {/* Lingkaran Icon */}
-              <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
-                {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
-                <HiOutlineChartBar className="h-8 w-8 text-white" />
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={0}
+        >
+          <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
+            {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
+            <div>
+              {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
+              <div className="mb-4 flex items-center space-x-4">
+                {/* Lingkaran Icon */}
+                <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
+                  {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
+                  <HiOutlineChartBar className="h-8 w-8 text-white" />
+                </div>
+                {/* Judul dan Tag */}
+                <div>
+                  <h5 className="mb-1 text-xl font-bold text-gray-900">
+                    Perbaikan Ringan & Instan
+                  </h5>
+                  <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+                    Mulai 1 Jam
+                  </span>
+                </div>
               </div>
-              {/* Judul dan Tag */}
-              <div>
-                <h5 className="mb-1 text-xl font-bold text-gray-900">
-                  Perbaikan Ringan & Instan
-                </h5>
-                <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
-                  Mulai 1 Jam
-                </span>
-              </div>
+
+              {/* Deskripsi */}
+              <p className="mb-4 font-normal text-gray-700">
+                Tukang kami gercep datang, beres tuntas di tempat. Beres cepat,
+                garansi terjamin!
+              </p>
+
+              {/* Daftar Fitur */}
+              <ul className="mb-6 space-y-2">
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Keran bocor
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Saklar nge-blank
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Pintu seret
+                </li>
+              </ul>
             </div>
 
-            {/* Deskripsi */}
-            <p className="mb-4 font-normal text-gray-700">
-              Tukang kami gercep datang, beres tuntas di tempat. Beres cepat,
-              garansi terjamin!
-            </p>
-
-            {/* Daftar Fitur */}
-            <ul className="mb-6 space-y-2">
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Keran bocor
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Saklar nge-blank
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Pintu seret
-              </li>
-            </ul>
-          </div>
-
-          {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
-          <div className="mt-auto flex items-center justify-between">
-            <span className="text-xl font-bold text-gray-900">Rp 50.000</span>
-            <Button
-              size="sm"
-              className="bg-gray-800 text-white hover:bg-gray-700"
-            >
-              <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
-              Order Sekarang
-            </Button>
-          </div>
-        </Card>
+            {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
+            <div className="mt-auto flex items-center justify-between">
+              <span className="text-xl font-bold text-gray-900">Rp 50.000</span>
+              <Button
+                size="sm"
+                className="bg-gray-800 text-white hover:bg-gray-700"
+              >
+                <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
+                Order Sekarang
+              </Button>
+            </div>
+          </Card>
+        </RevealOnScroll>
 
         {/* Konten 2 */}
-        <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
-          {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
-          <div>
-            {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
-            <div className="mb-4 flex items-center space-x-4">
-              {/* Lingkaran Icon */}
-              <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
-                {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
-                <HiOutlineChartBar className="h-8 w-8 text-white" />
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={200}
+        >
+          <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
+            {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
+            <div>
+              {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
+              <div className="mb-4 flex items-center space-x-4">
+                {/* Lingkaran Icon */}
+                <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
+                  {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
+                  <HiOutlineChartBar className="h-8 w-8 text-white" />
+                </div>
+                {/* Judul dan Tag */}
+                <div>
+                  <h5 className="mb-1 text-xl font-bold text-gray-900">
+                    Instalasi Baru
+                  </h5>
+                  <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+                    Tergantung Proyek
+                  </span>
+                </div>
               </div>
-              {/* Judul dan Tag */}
-              <div>
-                <h5 className="mb-1 text-xl font-bold text-gray-900">
-                  Instalasi & Pemasangan Baru
-                </h5>
-                <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
-                  Tergantung Proyek
-                </span>
-              </div>
+
+              {/* Deskripsi */}
+              <p className="mb-4 font-normal text-gray-700">
+                Baru beli AC, TV, dll? Jangan pusing masangnya! Tim ahli kami
+                siap pasang.
+              </p>
+
+              {/* Daftar Fitur */}
+              <ul className="mb-6 space-y-2">
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Rapi
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Aman
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Sesuai standar
+                </li>
+              </ul>
             </div>
 
-            {/* Deskripsi */}
-            <p className="mb-4 font-normal text-gray-700">
-              Baru beli AC, TV, water heater, atau furniture DIY? Jangan pusing
-              masangnya! Tim ahli kami siap pasang.
-            </p>
-
-            {/* Daftar Fitur */}
-            <ul className="mb-6 space-y-2">
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Rapi
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Aman
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Sesuai standar
-              </li>
-            </ul>
-          </div>
-
-          {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
-          <div className="mt-auto flex items-center justify-between">
-            <span className="text-xl font-bold text-gray-900">
-              Rp 75.000 / item
-            </span>
-            <Button
-              size="sm"
-              className="bg-gray-800 text-white hover:bg-gray-700"
-            >
-              <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
-              Order Sekarang
-            </Button>
-          </div>
-        </Card>
+            {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
+            <div className="mt-auto flex items-center justify-between">
+              <span className="text-xl font-bold text-gray-900">
+                Rp 75.000 / item
+              </span>
+              <Button
+                size="sm"
+                className="bg-gray-800 text-white hover:bg-gray-700"
+              >
+                <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
+                Order Sekarang
+              </Button>
+            </div>
+          </Card>
+        </RevealOnScroll>
 
         {/* Konten 3 */}
-        <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
-          {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
-          <div>
-            {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
-            <div className="mb-4 flex items-center space-x-4">
-              {/* Lingkaran Icon */}
-              <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
-                {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
-                <HiOutlineChartBar className="h-8 w-8 text-white" />
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={400}
+        >
+          <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
+            {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
+            <div>
+              {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
+              <div className="mb-4 flex items-center space-x-4">
+                {/* Lingkaran Icon */}
+                <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
+                  {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
+                  <HiOutlineChartBar className="h-8 w-8 text-white" />
+                </div>
+                {/* Judul dan Tag */}
+                <div>
+                  <h5 className="mb-1 text-xl font-bold text-gray-900">
+                    Pengecatan & Dekorasi
+                  </h5>
+                  <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+                    Sesuai Estimasi
+                  </span>
+                </div>
               </div>
-              {/* Judul dan Tag */}
-              <div>
-                <h5 className="mb-1 text-xl font-bold text-gray-900">
-                  Pengecatan & Dekorasi
-                </h5>
-                <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
-                  Sesuai Estimasi
-                </span>
-              </div>
+
+              {/* Deskripsi */}
+              <p className="mb-4 font-normal text-gray-700">
+                Mau ganti lantai, cat ulang, atau rombak sedikit ruangan? Kami
+                siap garap!
+              </p>
+
+              {/* Daftar Fitur */}
+              <ul className="mb-6 space-y-2">
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Survei & estimasi gratis
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Tukang profesional & berpengalaman
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Progress terpantau via website
+                </li>
+              </ul>
             </div>
 
-            {/* Deskripsi */}
-            <p className="mb-4 font-normal text-gray-700">
-              Mau ganti lantai, cat ulang, atau rombak sedikit ruangan? Kami
-              siap garap!
-            </p>
-
-            {/* Daftar Fitur */}
-            <ul className="mb-6 space-y-2">
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Survei & estimasi gratis
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Tukang profesional & berpengalaman
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Progress terpantau via website
-              </li>
-            </ul>
-          </div>
-
-          {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
-          <div className="mt-auto flex items-center justify-between">
-            <span className="text-xl font-bold text-gray-900">
-              Rp 200.000 / m2
-            </span>
-            <Button
-              size="sm"
-              className="bg-gray-800 text-white hover:bg-gray-700"
-            >
-              <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
-              Order Sekarang
-            </Button>
-          </div>
-        </Card>
+            {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
+            <div className="mt-auto flex items-center justify-between">
+              <span className="text-xl font-bold text-gray-900">
+                Rp 200.000 / m2
+              </span>
+              <Button
+                size="sm"
+                className="bg-gray-800 text-white hover:bg-gray-700"
+              >
+                <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
+                Order Sekarang
+              </Button>
+            </div>
+          </Card>
+        </RevealOnScroll>
 
         {/* Konten 4 */}
-        <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
-          {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
-          <div>
-            {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
-            <div className="mb-4 flex items-center space-x-4">
-              {/* Lingkaran Icon */}
-              <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
-                {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
-                <HiOutlineChartBar className="h-8 w-8 text-white" />
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={600}
+        >
+          <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
+            {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
+            <div>
+              {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
+              <div className="mb-4 flex items-center space-x-4">
+                {/* Lingkaran Icon */}
+                <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
+                  {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
+                  <HiOutlineChartBar className="h-8 w-8 text-white" />
+                </div>
+                {/* Judul dan Tag */}
+                <div>
+                  <h5 className="mb-1 text-xl font-bold text-gray-900">
+                    Jasa Pemeliharaan Rutin
+                  </h5>
+                  <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+                    Fleksibel
+                  </span>
+                </div>
               </div>
-              {/* Judul dan Tag */}
-              <div>
-                <h5 className="mb-1 text-xl font-bold text-gray-900">
-                  Jasa Pemeliharaan Rutin
-                </h5>
-                <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
-                  Fleksibel
-                </span>
-              </div>
+
+              {/* Deskripsi */}
+              <p className="mb-4 font-normal text-gray-700">
+                Punya properti yang butuh perawatan rutin? Serahkan pada kami!
+                kami ahlinya dalam merawat properti Anda.
+              </p>
+
+              {/* Daftar Fitur */}
+              <ul className="mb-6 space-y-2">
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Jadwal fleksibel sesuai kebutuhan
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Pengecekan menyeluruh & pembersihan
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Tim tepercaya dan ramah
+                </li>
+              </ul>
             </div>
 
-            {/* Deskripsi */}
-            <p className="mb-4 font-normal text-gray-700">
-              Punya properti yang butuh perawatan rutin? Serahkan pada kami!
-            </p>
-
-            {/* Daftar Fitur */}
-            <ul className="mb-6 space-y-2">
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Jadwal fleksibel sesuai kebutuhan
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Pengecekan menyeluruh & pembersihan
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Tim tepercaya dan ramah
-              </li>
-            </ul>
-          </div>
-
-          {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
-          <div className="mt-auto flex items-center justify-between">
-            <span className="text-xl font-bold text-gray-900">
-              Rp 150.000 / visit
-            </span>
-            <Button
-              size="sm"
-              className="bg-gray-800 text-white hover:bg-gray-700"
-            >
-              <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
-              Order Sekarang
-            </Button>
-          </div>
-        </Card>
+            {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
+            <div className="mt-auto flex items-center justify-between">
+              <span className="text-xl font-bold text-gray-900">
+                Rp 150.000 / visit
+              </span>
+              <Button
+                size="sm"
+                className="bg-gray-800 text-white hover:bg-gray-700"
+              >
+                <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
+                Order Sekarang
+              </Button>
+            </div>
+          </Card>
+        </RevealOnScroll>
 
         {/* Konten 5 */}
-        <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
-          {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
-          <div>
-            {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
-            <div className="mb-4 flex items-center space-x-4">
-              {/* Lingkaran Icon */}
-              <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
-                {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
-                <HiOutlineChartBar className="h-8 w-8 text-white" />
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={800}
+        >
+          <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
+            {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
+            <div>
+              {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
+              <div className="mb-4 flex items-center space-x-4">
+                {/* Lingkaran Icon */}
+                <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
+                  {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
+                  <HiOutlineChartBar className="h-8 w-8 text-white" />
+                </div>
+                {/* Judul dan Tag */}
+                <div>
+                  <h5 className="mb-1 text-xl font-bold text-gray-900">
+                    Layanan Darurat 24/7
+                  </h5>
+                  <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+                    Respons Cepat
+                  </span>
+                </div>
               </div>
-              {/* Judul dan Tag */}
-              <div>
-                <h5 className="mb-1 text-xl font-bold text-gray-900">
-                  Layanan Darurat 24/7
-                </h5>
-                <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
-                  Respons Cepat
-                </span>
-              </div>
+
+              {/* Deskripsi */}
+              <p className="mb-4 font-normal text-gray-700">
+                Listrik padam tengah malam? Pipa bocor mendadak? Jangan panik,
+                kami ada!
+              </p>
+
+              {/* Daftar Fitur */}
+              <ul className="mb-6 space-y-2">
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Tukang siaga 24 jam
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Penanganan cepat & efektif
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Solusi instan untuk kondisi darurat
+                </li>
+              </ul>
             </div>
 
-            {/* Deskripsi */}
-            <p className="mb-4 font-normal text-gray-700">
-              Listrik padam tengah malam? Pipa bocor mendadak? Jangan panik,
-              kami ada!
-            </p>
-
-            {/* Daftar Fitur */}
-            <ul className="mb-6 space-y-2">
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Tukang siaga 24 jam
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Penanganan cepat & efektif
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Solusi instan untuk kondisi darurat
-              </li>
-            </ul>
-          </div>
-
-          {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
-          <div className="mt-auto flex items-center justify-between">
-            <span className="text-xl font-bold text-gray-900">
-              Harga Khusus
-            </span>
-            <Button
-              size="sm"
-              className="bg-gray-800 text-white hover:bg-gray-700"
-            >
-              <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
-              Order Sekarang
-            </Button>
-          </div>
-        </Card>
+            {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
+            <div className="mt-auto flex items-center justify-between">
+              <span className="text-xl font-bold text-gray-900">
+                Harga Khusus
+              </span>
+              <Button
+                size="sm"
+                className="bg-gray-800 text-white hover:bg-gray-700"
+              >
+                <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
+                Order Sekarang
+              </Button>
+            </div>
+          </Card>
+        </RevealOnScroll>
 
         {/* Konten 6 */}
-        <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
-          {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
-          <div>
-            {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
-            <div className="mb-4 flex items-center space-x-4">
-              {/* Lingkaran Icon */}
-              <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
-                {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
-                <HiOutlineChartBar className="h-8 w-8 text-white" />
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={1000}
+        >
+          <Card className="flex min-h-[200px] flex-col justify-between rounded-lg !bg-white p-2 shadow-lg">
+            {/* Wrapper untuk konten atas (kecuali harga dan tombol) agar bisa didorong ke atas */}
+            <div>
+              {/* Bagian Atas: Icon, Judul, dan Tag Waktu */}
+              <div className="mb-4 flex items-center space-x-4">
+                {/* Lingkaran Icon */}
+                <div className="flex items-center justify-center rounded-full bg-gray-800 p-3">
+                  {/* Ganti ikon di sini sesuai layanan (contoh: HiOutlineChartBar untuk Kiloan) */}
+                  <HiOutlineChartBar className="h-8 w-8 text-white" />
+                </div>
+                {/* Judul dan Tag */}
+                <div>
+                  <h5 className="mb-1 text-xl font-bold text-gray-900">
+                    Renovasi & Proyek Sedang
+                  </h5>
+                  <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+                    Sesuai Estimasi
+                  </span>
+                </div>
               </div>
-              {/* Judul dan Tag */}
-              <div>
-                <h5 className="mb-1 text-xl font-bold text-gray-900">
-                  Renovasi & Proyek Sedang
-                </h5>
-                <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700">
-                  Sesuai Estimasi
-                </span>
-              </div>
+
+              {/* Deskripsi */}
+              <p className="mb-4 font-normal text-gray-700">
+                Butuh rombak dapur, renovasi kamar mandi, atau pasang keramik
+                baru? Kami tangani dari nol sampai beres.
+              </p>
+
+              {/* Daftar Fitur */}
+              <ul className="mb-6 space-y-2">
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Survei & estimasi gratis
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Tukang profesional & berpengalaman
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <HiCheck className="mr-2 h-5 w-5 text-green-500" />
+                  Progress terpantau via website
+                </li>
+              </ul>
             </div>
 
-            {/* Deskripsi */}
-            <p className="mb-4 font-normal text-gray-700">
-              Butuh rombak dapur, renovasi kamar mandi, atau pasang keramik
-              baru? Kami tangani dari nol sampai beres.
-            </p>
-
-            {/* Daftar Fitur */}
-            <ul className="mb-6 space-y-2">
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Survei & estimasi gratis
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Tukang profesional & berpengalaman
-              </li>
-              <li className="flex items-center text-gray-700">
-                <HiCheck className="mr-2 h-5 w-5 text-green-500" />
-                Progress terpantau via website
-              </li>
-            </ul>
-          </div>
-
-          {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
-          <div className="mt-auto flex items-center justify-between">
-            <span className="text-xl font-bold text-gray-900">
-              Rp 200.000 / m2
-            </span>
-            <Button
-              size="sm"
-              className="bg-gray-800 text-white hover:bg-gray-700"
-            >
-              <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
-              Order Sekarang
-            </Button>
-          </div>
-        </Card>
+            {/* Bagian Bawah: Harga dan Tombol "Order Sekarang" */}
+            <div className="mt-auto flex items-center justify-between">
+              <span className="text-xl font-bold text-gray-900">
+                Rp 200.000 / m2
+              </span>
+              <Button
+                size="sm"
+                className="bg-gray-800 text-white hover:bg-gray-700"
+              >
+                <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
+                Order Sekarang
+              </Button>
+            </div>
+          </Card>
+        </RevealOnScroll>
       </div>
       {/* Konten Utama (Main Conten Area) 6 */}
       <div className="mx-auto mt-40 flex w-full flex-col items-center justify-center px-4">
         <div className="mb-8">
           {" "}
-          <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
-            <span className="flex items-center gap-x-2 text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
-              Apa Kata Pelanggan
-            </span>
-          </div>
+          <RevealOnScroll>
+            <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
+              <span className="flex items-center gap-x-2 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+                Apa Kata Pelanggan
+              </span>
+            </div>
+          </RevealOnScroll>
         </div>
 
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center text-center">
-          <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
-            Pelanggan Kami Puas & Kembali Lagi
-          </h3>
-          <p className="mt-4 max-w-2xl text-lg text-gray-700">
-            Kenapa? Karena bagi kami, beres-beres rumah bukan cuma soal kerja
-            fisik, tapi tentang memberi solusi tuntas, hasil yang bisa
-            diandalkan, dan pelayanan sepenuh hati yang bikin kamu nyaman.
-          </p>
+          <RevealOnScroll direction="up">
+            <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
+              Pelanggan Kami Puas & Kembali Lagi
+            </h3>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up">
+            <p className="mt-4 max-w-2xl text-lg text-gray-700">
+              Kenapa? Karena bagi kami, beres-beres rumah bukan cuma soal kerja
+              fisik, tapi tentang memberi solusi tuntas, hasil yang bisa
+              diandalkan, dan pelayanan sepenuh hati yang bikin kamu nyaman.
+            </p>
+          </RevealOnScroll>
         </div>
       </div>
       {/* Konten Utama (Main Conten Area) 7 */}
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white p-4 py-12">
-        {" "}
-        {/* Tambah py-12 untuk padding atas bawah */}
-        <h2 className="mb-10 text-center text-4xl font-extrabold text-gray-900">
-          Mereka Bilang...
-        </h2>{" "}
-        {/* Judul */}
-        <div className={styles.slider}>
-          <div className={styles["slide-track"]}>
-            {testimonialsData.map((data, index) => (
-              <div className={styles.slide} key={index}>
-                {/* Konten kartu testimoni Anda */}
-                <div className="mb-4 flex items-center">
-                  <Image
-                    src={data.avatarSrc}
-                    alt={data.name}
-                    width={48}
-                    height={48}
-                    className="mr-4 rounded-full object-cover"
-                    onError={(e) => {
-                      console.error("Failed to load image:", data.avatarSrc, e);
-                      // Opsi: e.currentTarget.src = '/images/placeholder.png';
-                    }}
-                  />
-                  <div>
-                    <p className="text-lg font-semibold text-gray-900">
-                      {data.name}
+      <RevealOnScroll direction="up">
+        <div className="flex min-h-screen flex-col items-center justify-center bg-white p-4 py-12">
+          {" "}
+          {/* Tambah py-12 untuk padding atas bawah */}
+          <h2 className="mb-10 text-center text-4xl font-extrabold text-gray-900">
+            Mereka Bilang...
+          </h2>{" "}
+          {/* Judul */}
+          <div className={styles.slider}>
+            <div className={styles["slide-track"]}>
+              {testimonialsData.map((data, index) => (
+                <div className={styles.slide} key={index}>
+                  {/* Konten kartu testimoni Anda */}
+                  <div className="mb-4 flex items-center">
+                    <Image
+                      src={data.avatarSrc}
+                      alt={data.name}
+                      width={48}
+                      height={48}
+                      className="mr-4 rounded-full object-cover"
+                      onError={(e) => {
+                        console.error(
+                          "Failed to load image:",
+                          data.avatarSrc,
+                          e,
+                        );
+                        // Opsi: e.currentTarget.src = '/images/placeholder.png';
+                      }}
+                    />
+                    <div>
+                      <p className="text-lg font-semibold text-gray-900">
+                        {data.name}
+                      </p>
+                      <p className="text-sm text-gray-600">{data.title}</p>
+                    </div>
+                  </div>
+                  {data.tag && (
+                    <span className="mb-4 inline-block rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-800">
+                      {data.tag}
+                    </span>
+                  )}
+                  <p className="mb-4 flex-grow text-gray-700">
+                    {data.testimonial}
+                  </p>
+                  <div className="text-gray-500 italic">
+                    <p>
+                      {data.testimonial.split(". ")[0]}
+                      {data.testimonial.includes(".") ? "\u002E" : ""}
                     </p>
-                    <p className="text-sm text-gray-600">{data.title}</p>
                   </div>
                 </div>
-                {data.tag && (
-                  <span className="mb-4 inline-block rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-800">
-                    {data.tag}
-                  </span>
-                )}
-                <p className="mb-4 flex-grow text-gray-700">
-                  {data.testimonial}
-                </p>
-                <div className="text-gray-500 italic">
-                  <p>
-                    "{data.testimonial.split(". ")[0]}
-                    {data.testimonial.includes(".") ? "." : ""}"
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+          {/* Konten lain */}
         </div>
-        {/* Konten lain */}
-      </div>
+      </RevealOnScroll>
       {/* Konten Utama (Main Conten Area) 8 */}
-      <div className="mx-auto mt-10 flex w-full flex-col items-center justify-center px-4">
-        <div className="mb-8">
-          {" "}
-          <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
-            <span className="flex items-center gap-x-2 text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
-                />
-              </svg>
-              FAQ OmToekang
-            </span>
-          </div>
-        </div>
-
-        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center text-center">
-          <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
-            Punya kendala atau ingin tahu lebih banyak?
-          </h3>
-          <p className="mt-4 max-w-2xl text-lg text-gray-700">
-            Kami sudah rangkum jawaban atas pertanyaan yang paling sering
-            muncul.
-          </p>
-        </div>
-      </div>
-      <div className="mx-auto mt-10 w-full max-w-screen-lg px-4">
-        {" "}
-        <Accordion className="shadow-lg">
-          <AccordionPanel>
-            <AccordionTitle className="text-xl font-extrabold text-gray-900">
-              Apa aja layanan tukang yang tersedia?
-            </AccordionTitle>
-            <AccordionContent>
-              <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Kami menyediakan berbagai jenis layanan tukang yang bisa
-                disesuaikan sama kebutuhanmu. Dari perbaikan rumah tangga ringan
-                kayak keran bocor atau saklar rusak, instalasi baru kayak pasang
-                AC atau furniture, sampai proyek renovasi (pengecatan, pasang
-                keramik, rombak kamar mandi), dan juga layanan darurat 24/7.
-                Semua dikerjakan sama tukang-tukang pilihan yang profesional,
-                biar hasilnya maksimal dan rumahmu nyaman lagi.
-              </p>
-            </AccordionContent>
-          </AccordionPanel>
-          <AccordionPanel>
-            <AccordionTitle className="text-xl font-extrabold text-gray-900">
-              Berapa lama biasanya pekerjaan selesai?
-            </AccordionTitle>
-            <AccordionContent>
-              <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Waktu penyelesaian tergantung jenis dan skala pekerjaan yang
-                kamu pilih. Untuk perbaikan ringan, bisa kelar dalam hitungan
-                jam. Kalau proyek yang lebih besar kayak renovasi, kami akan
-                kasih estimasi waktu yang jelas setelah survei. Kami selalu
-                berusaha kerja cepat tapi tetap teliti, biar hasilnya maksimal
-                dan gak mengecewakan. Tim kami bakal infokan terus progresnya
-                biar kamu gak penasaran.
-              </p>
-            </AccordionContent>
-          </AccordionPanel>
-          <AccordionPanel>
-            <AccordionTitle className="text-xl font-extrabold text-gray-900">
-              Bisa minta survei dan estimasi biaya ke rumah?
-            </AccordionTitle>
-            <AccordionContent>
-              <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Tentu bisa! Kami punya layanan survei dan estimasi biaya GRATIS
-                tanpa biaya tersembunyi. Jadi kamu nggak perlu ragu atau takut
-                kemahalan di awal. Tinggal booking via WhatsApp atau telepon,
-                nanti tim kami datang buat ngecek lokasi dan kasih perkiraan
-                harga yang transparan. Cocok banget buat kamu yang mau
-                perencanaan matang, atau lagi butuh masukan dari ahlinya.
-                Praktis, jelas, dan tanpa biaya tambahan.
-              </p>
-            </AccordionContent>
-          </AccordionPanel>
-          <AccordionPanel>
-            <AccordionTitle className="text-xl font-extrabold text-gray-900">
-              Pembayarannya bisa pakai apa aja?
-            </AccordionTitle>
-            <AccordionContent>
-              <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Kami mendukung berbagai metode pembayaran biar kamu nggak ribet.
-                Bisa bayar pakai cash langsung di tempat setelah pekerjaan
-                selesai, transfer bank buat yang suka cashless, atau QRIS biar
-                cepat dan simpel. Apapun metode yang kamu pilih, tim kami bakal
-                kasih konfirmasi jelas dan transparan biar nggak ada salah
-                paham. Kami pastikan pembayaran aman dan nyaman buat semua.
-              </p>
-            </AccordionContent>
-          </AccordionPanel>
-          <AccordionPanel>
-            <AccordionTitle className="text-xl font-extrabold text-gray-900">
-              Gimana kalau pekerjaan enggak sesuai atau ada
-              kerusakan/kehilangan?
-            </AccordionTitle>
-            <AccordionContent>
-              <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Kami paham banget kalau kepercayaan itu penting. Makanya, semua
-                proses kerja tukang kami ikuti SOP yang ketat dan rapi. Kalau
-                sampai terjadi masalah kayak hasil kurang sesuai, atau ada
-                kerusakan/kehilangan yang disebabkan oleh tim kami, kami siap
-                bertanggung jawab sesuai dengan ketentuan yang berlaku. Kami
-                akan berusaha menyelesaikan masalah secepat mungkin, baik dengan
-                perbaikan ulang maupun kompensasi yang adil. Nggak perlu
-                khawatir karena kami pegang komitmen buat selalu amanah dan
-                profesional.
-              </p>
-            </AccordionContent>
-          </AccordionPanel>
-          <AccordionPanel>
-            <AccordionTitle className="text-xl font-extrabold text-gray-900">
-              Ada promo atau diskon khusus?
-            </AccordionTitle>
-            <AccordionContent>
-              <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Yup, kami rutin kasih promo menarik setiap bulan atau saat momen
-                tertentu kayak Hari Kemerdekaan, Lebaran, atau akhir tahun.
-                Diskonnya bisa macem-macem, mulai dari potongan harga layanan,
-                bonus survei gratis untuk proyek besar, sampai paket hemat untuk
-                pemeliharaan rutin. Buat dapet info ter-update, kamu bisa cek
-                Instagram kami atau langsung tanya admin via WhatsApp. Siapa tau
-                pas kamu order, lagi ada promo yang bikin hemat dompet dan makin
-                senyum.
-              </p>
-            </AccordionContent>
-          </AccordionPanel>
-        </Accordion>
-      </div>
-      {/* Konten Utama (Main Conten Area) 9 */}
       <div className="mx-auto mt-20 flex w-full flex-col items-center justify-center px-4">
         <div className="mb-8">
           {" "}
-          <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
-            <span className="flex items-center gap-x-2 text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0 6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z"
-                />
-              </svg>
-              Kontak Kami
-            </span>
-          </div>
+          <RevealOnScroll>
+            <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
+              <span className="flex items-center gap-x-2 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+                  />
+                </svg>
+                FAQ OmToekang
+              </span>
+            </div>
+          </RevealOnScroll>
         </div>
 
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center text-center">
-          <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
-            Butuh Bantuan? Langsung Kontak Kami!
-          </h3>
-          <p className="mt-4 max-w-2xl text-lg text-gray-700">
-            Kami hadir untuk bikin urusan rumahmu beres total — tukang
-            profesional, hasil terjamin, dan anti ribet!
-          </p>
+          <RevealOnScroll direction="up">
+            <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
+              Punya kendala atau ingin tahu lebih banyak?
+            </h3>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up">
+            <p className="mt-4 max-w-2xl text-lg text-gray-700">
+              Kami sudah rangkum jawaban atas pertanyaan yang paling sering
+              muncul.
+            </p>
+          </RevealOnScroll>
+        </div>
+      </div>
+      <RevealOnScroll direction="up">
+        <div className="mx-auto mt-10 w-full max-w-screen-lg px-4">
+          {" "}
+          <Accordion className="shadow-lg">
+            <AccordionPanel>
+              <AccordionTitle className="text-xl font-extrabold text-gray-900">
+                Apa aja layanan tukang yang tersedia?
+              </AccordionTitle>
+              <AccordionContent>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Kami menyediakan berbagai jenis layanan tukang yang bisa
+                  disesuaikan sama kebutuhanmu. Dari perbaikan rumah tangga
+                  ringan kayak keran bocor atau saklar rusak, instalasi baru
+                  kayak pasang AC atau furniture, sampai proyek renovasi
+                  (pengecatan, pasang keramik, rombak kamar mandi), dan juga
+                  layanan darurat 24/7. Semua dikerjakan sama tukang-tukang
+                  pilihan yang profesional, biar hasilnya maksimal dan rumahmu
+                  nyaman lagi.
+                </p>
+              </AccordionContent>
+            </AccordionPanel>
+            <AccordionPanel>
+              <AccordionTitle className="text-xl font-extrabold text-gray-900">
+                Berapa lama biasanya pekerjaan selesai?
+              </AccordionTitle>
+              <AccordionContent>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Waktu penyelesaian tergantung jenis dan skala pekerjaan yang
+                  kamu pilih. Untuk perbaikan ringan, bisa kelar dalam hitungan
+                  jam. Kalau proyek yang lebih besar kayak renovasi, kami akan
+                  kasih estimasi waktu yang jelas setelah survei. Kami selalu
+                  berusaha kerja cepat tapi tetap teliti, biar hasilnya maksimal
+                  dan gak mengecewakan. Tim kami bakal infokan terus progresnya
+                  biar kamu gak penasaran.
+                </p>
+              </AccordionContent>
+            </AccordionPanel>
+            <AccordionPanel>
+              <AccordionTitle className="text-xl font-extrabold text-gray-900">
+                Bisa minta survei dan estimasi biaya ke rumah?
+              </AccordionTitle>
+              <AccordionContent>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Tentu bisa! Kami punya layanan survei dan estimasi biaya
+                  GRATIS tanpa biaya tersembunyi. Jadi kamu nggak perlu ragu
+                  atau takut kemahalan di awal. Tinggal booking via WhatsApp
+                  atau telepon, nanti tim kami datang buat ngecek lokasi dan
+                  kasih perkiraan harga yang transparan. Cocok banget buat kamu
+                  yang mau perencanaan matang, atau lagi butuh masukan dari
+                  ahlinya. Praktis, jelas, dan tanpa biaya tambahan.
+                </p>
+              </AccordionContent>
+            </AccordionPanel>
+            <AccordionPanel>
+              <AccordionTitle className="text-xl font-extrabold text-gray-900">
+                Pembayarannya bisa pakai apa aja?
+              </AccordionTitle>
+              <AccordionContent>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Kami mendukung berbagai metode pembayaran biar kamu nggak
+                  ribet. Bisa bayar pakai cash langsung di tempat setelah
+                  pekerjaan selesai, transfer bank buat yang suka cashless, atau
+                  QRIS biar cepat dan simpel. Apapun metode yang kamu pilih, tim
+                  kami bakal kasih konfirmasi jelas dan transparan biar nggak
+                  ada salah paham. Kami pastikan pembayaran aman dan nyaman buat
+                  semua.
+                </p>
+              </AccordionContent>
+            </AccordionPanel>
+            <AccordionPanel>
+              <AccordionTitle className="text-xl font-extrabold text-gray-900">
+                Gimana kalau pekerjaan enggak sesuai atau ada
+                kerusakan/kehilangan?
+              </AccordionTitle>
+              <AccordionContent>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Kami paham banget kalau kepercayaan itu penting. Makanya,
+                  semua proses kerja tukang kami ikuti SOP yang ketat dan rapi.
+                  Kalau sampai terjadi masalah kayak hasil kurang sesuai, atau
+                  ada kerusakan/kehilangan yang disebabkan oleh tim kami, kami
+                  siap bertanggung jawab sesuai dengan ketentuan yang berlaku.
+                  Kami akan berusaha menyelesaikan masalah secepat mungkin, baik
+                  dengan perbaikan ulang maupun kompensasi yang adil. Nggak
+                  perlu khawatir karena kami pegang komitmen buat selalu amanah
+                  dan profesional.
+                </p>
+              </AccordionContent>
+            </AccordionPanel>
+            <AccordionPanel>
+              <AccordionTitle className="text-xl font-extrabold text-gray-900">
+                Ada promo atau diskon khusus?
+              </AccordionTitle>
+              <AccordionContent>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Yup, kami rutin kasih promo menarik setiap bulan atau saat
+                  momen tertentu kayak Hari Kemerdekaan, Lebaran, atau akhir
+                  tahun. Diskonnya bisa macem-macem, mulai dari potongan harga
+                  layanan, bonus survei gratis untuk proyek besar, sampai paket
+                  hemat untuk pemeliharaan rutin. Buat dapet info ter-update,
+                  kamu bisa cek Instagram kami atau langsung tanya admin via
+                  WhatsApp. Siapa tau pas kamu order, lagi ada promo yang bikin
+                  hemat dompet dan makin senyum.
+                </p>
+              </AccordionContent>
+            </AccordionPanel>
+          </Accordion>
+        </div>
+      </RevealOnScroll>
+      {/* Konten Utama (Main Conten Area) 9 */}
+      <div className="mx-auto mt-30 flex w-full flex-col items-center justify-center px-4">
+        <div className="mb-8">
+          {" "}
+          <RevealOnScroll>
+            <div className="flex h-12 w-fit items-center justify-center rounded-lg bg-gray-800 px-6 py-2">
+              <span className="flex items-center gap-x-2 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0 6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z"
+                  />
+                </svg>
+                Kontak Kami
+              </span>
+            </div>
+          </RevealOnScroll>
+        </div>
+
+        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center text-center">
+          <RevealOnScroll direction="up">
+            <h3 className="mb-4 text-5xl leading-tight font-extrabold text-gray-900">
+              Butuh Bantuan? Langsung Kontak Kami!
+            </h3>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up">
+            <p className="mt-4 max-w-2xl text-lg text-gray-700">
+              Kami hadir untuk bikin urusan rumahmu beres total — tukang
+              profesional, hasil terjamin, dan anti ribet!
+            </p>
+          </RevealOnScroll>
         </div>
       </div>
       <div className="mx-auto mt-10 grid max-w-screen-xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {/* Konten 1 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
-          <img src="/in-love.png" alt="Icon 1" className="mb-4 h-16 w-16" />
-          <p className="text-gray-700">Pelanggan Puas</p>
-          <h3 className="mb-2 text-xl font-bold text-gray-900">200+</h3>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={0}
+        >
+          <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
+            <img src="/in-love.png" alt="Icon 1" className="mb-4 h-16 w-16" />
+            <p className="text-gray-700">Pelanggan Puas</p>
+            <h3 className="mb-2 text-xl font-bold text-gray-900">200+</h3>
+          </div>
+        </RevealOnScroll>
 
         {/* Konten 2 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
-          <img src="/warehouse.png" alt="Icon 2" className="mb-4 h-16 w-16" />
-          <p className="text-gray-700">Cabang</p>
-          <h3 className="mb-2 text-xl font-bold text-gray-900">1 Lokasi</h3>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={200}
+        >
+          <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
+            <img src="/warehouse.png" alt="Icon 2" className="mb-4 h-16 w-16" />
+            <p className="text-gray-700">Cabang</p>
+            <h3 className="mb-2 text-xl font-bold text-gray-900">1 Lokasi</h3>
+          </div>
+        </RevealOnScroll>
 
         {/* Konten 3 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
-          <img src="/check.png" alt="Icon 3" className="mb-4 h-16 w-16" />
-          <p className="text-gray-700">Order Selesai</p>
-          <h3 className="mb-2 text-xl font-bold text-gray-900">200+</h3>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={400}
+        >
+          <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
+            <img src="/check.png" alt="Icon 3" className="mb-4 h-16 w-16" />
+            <p className="text-gray-700">Order Selesai</p>
+            <h3 className="mb-2 text-xl font-bold text-gray-900">200+</h3>
+          </div>
+        </RevealOnScroll>
 
         {/* Konten 4 */}
-        <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
-          <img src="/clock.png" alt="Icon 4" className="mb-4 h-16 w-16" />
-          <p className="text-gray-700">Repeat Order</p>
-          <h3 className="mb-2 text-xl font-bold text-gray-900">200+</h3>
-        </div>
+        <RevealOnScroll
+          direction="up"
+          threshold={0.3}
+          duration={1000}
+          delay={600}
+        >
+          <div className="flex flex-col items-center rounded-lg bg-white p-18 text-center shadow-lg">
+            <img src="/clock.png" alt="Icon 4" className="mb-4 h-16 w-16" />
+            <p className="text-gray-700">Repeat Order</p>
+            <h3 className="mb-2 text-xl font-bold text-gray-900">200+</h3>
+          </div>
+        </RevealOnScroll>
       </div>
       {/* Konten Utama (Main Conten Area) 10 */}
       <div className="container mx-auto mt-10 p-4">
@@ -1383,88 +1528,104 @@ export default function Page() {
           {/* Ini adalah Grid Container */}
           {/* Konten Kiri (Left Content Area) */}
           <div>
-            <Card className="shadow-lg">
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Alamat Kami
-              </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Jl. Kalilom Lor Indah No.33
-              </p>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Kota Surabaya, Jawa Timur 75611
-              </p>
-              <Button color="dark" outline>
-                Hubungi
-              </Button>
-            </Card>
-            <Card className="mt-4 shadow-lg">
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Telepon & WhatsApp
-              </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                +62 812-3456-7890
-              </p>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Customer service 24/7
-              </p>
-              <Button color="dark" outline>
-                Hubungi
-              </Button>
-            </Card>
+            <RevealOnScroll
+              direction="up"
+              threshold={0.3}
+              duration={1000}
+              delay={0}
+            >
+              <Card className="shadow-lg">
+                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Alamat Kami
+                </h5>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                  Jl. Kalilom Lor Indah No.33
+                </p>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                  Kota Surabaya, Jawa Timur 75611
+                </p>
+                <Button color="dark" outline>
+                  Hubungi
+                </Button>
+              </Card>
+            </RevealOnScroll>
+            <RevealOnScroll
+              direction="up"
+              threshold={0.3}
+              duration={1000}
+              delay={200}
+            >
+              <Card className="mt-4 shadow-lg">
+                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Telepon & WhatsApp
+                </h5>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                  +62 812-3456-7890
+                </p>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                  Customer service 24/7
+                </p>
+                <Button color="dark" outline>
+                  Hubungi
+                </Button>
+              </Card>
+            </RevealOnScroll>
           </div>
           {/* Konten Kanan (Right Content Area) */}
           <div>
-            <Card className="shadow-lg">
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Send Message
-              </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Isi formulir di bawah ini untuk menghubungi kami. Kami akan
-                merespons dalam waktu 24 jam.
-              </p>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="email4">Nama</Label>
+            <RevealOnScroll direction="up">
+              <Card className="shadow-lg">
+                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Send Message
+                </h5>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                  Isi formulir di bawah ini untuk menghubungi kami. Kami akan
+                  merespons dalam waktu 24 jam.
+                </p>
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="email4">Nama</Label>
+                  </div>
+                  <TextInput
+                    id="nama"
+                    type="nama"
+                    icon={HiOutlineCreditCard}
+                    placeholder="John Doe"
+                    required
+                  />
+                  <div className="mt-4 mb-2 block">
+                    <Label htmlFor="email4">Email</Label>
+                  </div>
+                  <TextInput
+                    id="email"
+                    type="email"
+                    icon={HiMail}
+                    placeholder="name@flowbite.com"
+                    required
+                  />
+                  <div className="mt-4 mb-2 block">
+                    <Label htmlFor="comment">Pesan</Label>
+                  </div>
+                  <Textarea
+                    id="comment"
+                    placeholder="Pesan kamu..."
+                    required
+                    rows={4}
+                  />
+                  <Button
+                    as={Link}
+                    href="#"
+                    size="xl"
+                    // w-56 mx-auto will center the button on mobile within its grid column
+                    className="mx-auto mt-4 w-50 bg-gray-800 text-white hover:bg-gray-700"
+                  >
+                    {/* Icon width set to w-10 as per your image example */}
+                    <HiOutlineFastForward className="mr-2 h-5 w-10" />
+                    Kirim Pesan
+                  </Button>
                 </div>
-                <TextInput
-                  id="nama"
-                  type="nama"
-                  icon={HiOutlineCreditCard}
-                  placeholder="John Doe"
-                  required
-                />
-                <div className="mt-4 mb-2 block">
-                  <Label htmlFor="email4">Email</Label>
-                </div>
-                <TextInput
-                  id="email"
-                  type="email"
-                  icon={HiMail}
-                  placeholder="name@flowbite.com"
-                  required
-                />
-                <div className="mt-4 mb-2 block">
-                  <Label htmlFor="comment">Pesan</Label>
-                </div>
-                <Textarea
-                  id="comment"
-                  placeholder="Pesan kamu..."
-                  required
-                  rows={4}
-                />
-                <Button
-                  as={Link}
-                  href="#"
-                  size="xl"
-                  // w-56 mx-auto will center the button on mobile within its grid column
-                  className="mx-auto mt-4 w-50 bg-gray-800 text-white hover:bg-gray-700"
-                >
-                  {/* Icon width set to w-10 as per your image example */}
-                  <HiOutlineFastForward className="mr-2 h-5 w-10" />
-                  Kirim Pesan
-                </Button>
-              </div>
-            </Card>
+              </Card>
+            </RevealOnScroll>
           </div>
         </div>
       </div>
