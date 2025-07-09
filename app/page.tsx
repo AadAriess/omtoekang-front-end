@@ -177,7 +177,7 @@ export default function Page() {
   return (
     <>
       {" "}
-      {/* Use a React Fragment to wrap multiple top-level elements */}
+      {/* Navbar area */}
       <Navbar
         fluid
         rounded
