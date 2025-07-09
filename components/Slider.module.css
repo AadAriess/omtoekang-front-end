@@ -1,0 +1,66 @@
+.slider {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap; /* Penting agar kartu tidak turun baris */
+  padding: 20px 0; /* Padding vertikal agar kartu tidak menempel tepi atas/bawah */
+}
+
+.slide-track {
+  display: flex;
+  /* (Lebar kartu + margin-right) * Jumlah total kartu yang diduplikasi */
+  /* Misal: (350px + 24px) * 6 kartu = 374px * 6 = 2244px */
+  /* Anda perlu menyesuaikan ini sesuai jumlah data dan lebar kartu */
+  width: calc(374px * 6); /* Contoh: 350px card width + 24px margin */
+  animation: scroll 40s linear infinite; /* Sesuaikan durasi */
+}
+
+.slide {
+  /* Gaya untuk setiap item slide (kartu) */
+  width: 350px; /* Lebar kartu Anda, sesuaikan */
+  height: auto; /* Tinggi akan menyesuaikan konten */
+  flex-shrink: 0; /* Penting agar slide tidak menyusut */
+  /* Margin kanan untuk jarak antar kartu, sesuaikan */
+  margin-right: 24px;
+  /* Gaya tambahan untuk kartu, seperti di testimoni Anda */
+  background-color: white;
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+  padding: 1.5rem; /* p-6 */
+  display: flex; /* Untuk konten di dalam kartu */
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 250px; /* Tinggi minimum agar kartu tidak terlalu pendek */
+}
+
+/* Keyframes untuk animasi scroll */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Geser sejauh lebar total dari separuh jumlah kartu (gambar unik) */
+    /* Misal: (350px + 24px) * 3 kartu unik = 374px * 3 = 1122px */
+    transform: translateX(calc(-374px * 3));
+  }
+}
+
+/* Media query untuk responsif jika diperlukan */
+@media (max-width: 768px) {
+  .slide {
+    width: 300px; /* Lebar kartu di mobile */
+    margin-right: 16px; /* Jarak di mobile */
+  }
+  .slide-track {
+    width: calc(316px * 6); /* (300 + 16) * 6 */
+    animation: scroll-mobile 40s linear infinite; /* Animasi terpisah untuk mobile */
+  }
+  @keyframes scroll-mobile {
+    100% {
+      transform: translateX(
+        calc(-316px * 3)
+      ); /* Geser sejauh (lebar kartu + margin) * 3 kartu unik */
+    }
+  }
+}

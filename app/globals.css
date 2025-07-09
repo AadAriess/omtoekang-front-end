@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@keyframes floatImage {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  } /* Bergerak 8px ke atas */
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: floatImage 3s ease-in-out infinite; /* Durasi 3 detik, mulus, berulang */
+}
