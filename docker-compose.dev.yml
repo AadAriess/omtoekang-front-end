@@ -1,0 +1,22 @@
+services:
+  omtukang-nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - shared-network
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+networks:
+  shared-network:
+    external: true
+
+volumes:
+  node_modules:
