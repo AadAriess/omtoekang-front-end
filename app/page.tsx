@@ -181,9 +181,8 @@ export default function Page() {
       <Navbar
         fluid
         rounded
-        className={`fixed top-0 z-50 w-full transform !bg-white py-4 shadow-lg transition-transform duration-1000 ease-out ${
-          isNavbarVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`fixed top-0 z-50 w-full transform !bg-white py-4 shadow-lg transition-transform duration-1000 ease-out ${isNavbarVisible ? "translate-y-0" : "-translate-y-full"
+          }`}
       >
         <div className="flex w-full flex-wrap items-center justify-between px-10">
           <NavbarBrand as={Link} href="https://flowbite-react.com">
@@ -202,11 +201,10 @@ export default function Page() {
             <NavbarLink
               href="#"
               // active={activeItem === "Beranda"} // Properti 'active' bawaan Flowbite React
-              className={`!font-normal ${
-                activeItem === "Beranda"
+              className={`!font-normal ${activeItem === "Beranda"
                   ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white" // Gaya untuk aktif
                   : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black" // Gaya untuk tidak aktif
-              } `}
+                } `}
               onClick={() => handleNavLinkClick("Beranda")} // Tangani klik
             >
               {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
@@ -236,11 +234,10 @@ export default function Page() {
               as={Link}
               href="#"
               // active={activeItem === "Layanan"}
-              className={`!font-normal ${
-                activeItem === "Layanan"
+              className={`!font-normal ${activeItem === "Layanan"
                   ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white" // Gaya untuk aktif
                   : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black" // Gaya untuk tidak aktif
-              } `}
+                } `}
               onClick={() => handleNavLinkClick("Layanan")} // Tangani klik
             >
               {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
@@ -269,11 +266,10 @@ export default function Page() {
             <NavbarLink
               href="#"
               // active={activeItem === "Harga"}
-              className={`!font-normal ${
-                activeItem === "Harga"
+              className={`!font-normal ${activeItem === "Harga"
                   ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
                   : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                } `}
               onClick={() => handleNavLinkClick("Harga")}
             >
               {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
@@ -302,11 +298,10 @@ export default function Page() {
             <NavbarLink
               href="#"
               // active={activeItem === "Order"}
-              className={`!font-normal ${
-                activeItem === "Order"
+              className={`!font-normal ${activeItem === "Order"
                   ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
                   : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                } `}
               onClick={() => handleNavLinkClick("Order")}
             >
               {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
@@ -335,11 +330,10 @@ export default function Page() {
             <NavbarLink
               href="#"
               // active={activeItem === "Lacak"}
-              className={`!font-normal ${
-                activeItem === "Lacak"
+              className={`!font-normal ${activeItem === "Lacak"
                   ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
                   : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                } `}
               onClick={() => handleNavLinkClick("Lacak")}
             >
               {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
@@ -368,11 +362,10 @@ export default function Page() {
             <NavbarLink
               href="#"
               // active={activeItem === "Kontak"}
-              className={`!font-normal ${
-                activeItem === "Kontak"
+              className={`!font-normal ${activeItem === "Kontak"
                   ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
                   : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                } `}
               onClick={() => handleNavLinkClick("Kontak")}
             >
               {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
@@ -400,12 +393,21 @@ export default function Page() {
         </div>
       </Navbar>
       {/* The Card component added here */}
-      <div
-        className={`mt-32 ml-12.5 box-border h-10 w-73 transform rounded-lg bg-gray-800 px-2 py-1 transition-all duration-1000 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} `}
-      >
-        <h5 className="text-left text-lg font-bold tracking-tight text-white">
-          #1 Toekang Terpercaya di Kotamu
-        </h5>
+      <div className="container mx-auto p-4">
+        {" "}
+        {/* Container utama untuk membatasi lebar dan menambahkan padding */}
+        <div className="mx-auto grid grid-cols-1 gap-8 pl-10 md:grid-cols-2">
+          {" "}
+          <div>
+            <div
+              className={`mt-32 box-border h-10 w-73 transform rounded-lg bg-gray-800 px-2 py-1 transition-all duration-1000 ease-out ${isIntroTextAndButtonsVisible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} `}
+            >
+              <h5 className="text-left text-lg font-bold tracking-tight text-white">
+                #1 Toekang Terpercaya di Kotamu
+              </h5>
+            </div>
+          </div>
+        </div>
       </div>
       {/* Konten Utama (Main Content Area) */}
       <div className="container mx-auto p-4">
@@ -557,7 +559,7 @@ export default function Page() {
                   href="#"
                   size="xl"
                   // w-56 mx-auto will center the button on mobile within its grid column
-                  className="mx-auto w-56 bg-gray-800 text-white hover:bg-gray-700"
+                  className="!hover:bg-gray-700 mx-auto w-56 !bg-gray-800 text-white"
                 >
                   {/* Icon width set to w-10 as per your image example */}
                   <HiOutlineShoppingCart className="mr-2 h-5 w-10" />
@@ -570,7 +572,7 @@ export default function Page() {
                   as={Link}
                   href="#"
                   size="xl"
-                  className="mx-auto w-56 bg-gray-800 text-white hover:bg-gray-700"
+                  className="!hover:bg-gray-700 mx-auto w-56 !bg-gray-800 text-white"
                 >
                   {/* Icon width set to w-10 as per your image example */}
                   <HiOutlineClipboardList className="mr-2 h-5 w-10" />
@@ -593,7 +595,7 @@ export default function Page() {
         </div>
       </div>
       {/* Konten Utama (Main Conten Area) 2 */}
-      <div className="mx-auto mt-40 flex w-full flex-col items-center justify-center px-4">
+      <div className="mx-auto mt-70 flex w-full flex-col items-center justify-center px-4">
         <div className="mb-8">
           {" "}
           <RevealOnScroll>
@@ -726,7 +728,7 @@ export default function Page() {
         </RevealOnScroll>
       </div>
       {/* Konten Utama (Main Conten Area) 4 */}
-      <div className="mx-auto mt-40 flex w-full flex-col items-center justify-center px-4">
+      <div className="mx-auto mt-70 flex w-full flex-col items-center justify-center px-4">
         <div className="mb-8">
           {" "}
           <RevealOnScroll>
@@ -828,7 +830,7 @@ export default function Page() {
               <span className="text-xl font-bold text-gray-900">Rp 50.000</span>
               <Button
                 size="sm"
-                className="bg-gray-800 text-white hover:bg-gray-700"
+                className="!hover:bg-gray-700 !bg-gray-800 text-white"
               >
                 <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
                 Order Sekarang
@@ -895,7 +897,7 @@ export default function Page() {
               </span>
               <Button
                 size="sm"
-                className="bg-gray-800 text-white hover:bg-gray-700"
+                className="!hover:bg-gray-700 !bg-gray-800 text-white"
               >
                 <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
                 Order Sekarang
@@ -962,7 +964,7 @@ export default function Page() {
               </span>
               <Button
                 size="sm"
-                className="bg-gray-800 text-white hover:bg-gray-700"
+                className="!hover:bg-gray-700 !bg-gray-800 text-white"
               >
                 <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
                 Order Sekarang
@@ -1029,7 +1031,7 @@ export default function Page() {
               </span>
               <Button
                 size="sm"
-                className="bg-gray-800 text-white hover:bg-gray-700"
+                className="!hover:bg-gray-700 !bg-gray-800 text-white"
               >
                 <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
                 Order Sekarang
@@ -1069,7 +1071,7 @@ export default function Page() {
               {/* Deskripsi */}
               <p className="mb-4 font-normal text-gray-700">
                 Listrik padam tengah malam? Pipa bocor mendadak? Jangan panik,
-                kami ada!
+                kami ada untuk anda dijam berapapun!
               </p>
 
               {/* Daftar Fitur */}
@@ -1096,7 +1098,7 @@ export default function Page() {
               </span>
               <Button
                 size="sm"
-                className="bg-gray-800 text-white hover:bg-gray-700"
+                className="!hover:bg-gray-700 !bg-gray-800 text-white"
               >
                 <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
                 Order Sekarang
@@ -1163,7 +1165,7 @@ export default function Page() {
               </span>
               <Button
                 size="sm"
-                className="bg-gray-800 text-white hover:bg-gray-700"
+                className="!hover:bg-gray-700 !bg-gray-800 text-white"
               >
                 <HiOutlineShoppingCart className="mr-2 h-5 w-5" />
                 Order Sekarang
@@ -1617,7 +1619,7 @@ export default function Page() {
                     href="#"
                     size="xl"
                     // w-56 mx-auto will center the button on mobile within its grid column
-                    className="mx-auto mt-4 w-50 bg-gray-800 text-white hover:bg-gray-700"
+                    className="!hover:bg-gray-700 mx-auto mt-4 w-50 !bg-gray-700 text-white"
                   >
                     {/* Icon width set to w-10 as per your image example */}
                     <HiOutlineFastForward className="mr-2 h-5 w-10" />
