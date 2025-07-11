@@ -1,47 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  Navbar,
-  NavbarBrand,
-  NavbarCollapse,
-  NavbarLink,
-  NavbarToggle,
-  Card,
-  Button,
-  Accordion,
-  AccordionContent,
-  AccordionPanel,
-  AccordionTitle,
-  Label,
-  TextInput,
-  Textarea,
-  Footer,
-  FooterCopyright,
-  FooterIcon,
-  FooterLink,
-  FooterLinkGroup,
-  FooterTitle,
-  HiOutlineClipboardList,
-  HiOutlineShoppingCart,
-  HiCheck,
-  HiOutlineChartBar,
-  HiMail,
-  HiOutlineCreditCard,
-  HiOutlineFastForward,
-  BsDribbble,
-  BsFacebook,
-  BsGithub,
-  BsInstagram,
-  BsTwitter,
-  Carousel,
-} from "../../components/Assets";
-
-import Link from "next/link";
-import styles from "../../components/Slider.module.css";
-import RevealOnScroll from "../../components/RevealOnScroll";
-import Image from "next/image";
+import { Card, Button, Label, TextInput } from "../../components/Assets";
 
 export default function Service() {
   return (
