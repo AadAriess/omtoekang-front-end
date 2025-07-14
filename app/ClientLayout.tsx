@@ -73,24 +73,22 @@ export default function ClientLayout({
             {/* Beranda Link */}
             <NavbarLink
               href="/"
-              // active={activeItem === "Beranda"} // Properti 'active' bawaan Flowbite React
+              // active={activeItem === "Beranda"}
               className={`!font-normal ${
                 isActive("/")
-                  ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
-                  : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                  ? "rounded-lg !bg-gray-800 !text-white" // Hapus padding di sini
+                  : "!text-black hover:!text-black dark:!text-black" // Hapus padding di sini
+              } px-4 py-4 md:px-2 md:py-2`}
+              // ^^^ Terapkan padding ini: default untuk mobile, dan lebih kecil untuk md/desktop
             >
-              {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
               <span className="flex items-center gap-x-2">
-                {" "}
-                {/* flex, items-center untuk vertikal align, gap-x-2 untuk spasi horizontal */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="currentColor" // 'currentColor' akan mengambil warna teks dari parent
-                  className="size-5" // Menggunakan size-5 atau size-6 sesuai keinginan Anda
+                  stroke="currentColor"
+                  className="size-5"
                 >
                   <path
                     strokeLinecap="round"
@@ -102,21 +100,17 @@ export default function ClientLayout({
               </span>
             </NavbarLink>
 
-            {/* Layanan Link */}
+            {/* Ulangi pola ini untuk semua NavbarLink lainnya */}
             <NavbarLink
               as={Link}
               href="/service"
-              // active={activeItem === "Layanan"}
               className={`!font-normal ${
                 isActive("/service")
-                  ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
-                  : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                  ? "rounded-lg !bg-gray-800 !text-white"
+                  : "!text-black hover:!text-black dark:!text-black"
+              } px-4 py-4 md:px-2 md:py-2`}
             >
-              {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
               <span className="flex items-center gap-x-2">
-                {" "}
-                {/* flex, items-center untuk vertikal align, gap-x-2 untuk spasi horizontal */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -135,20 +129,16 @@ export default function ClientLayout({
               </span>
             </NavbarLink>
 
-            {/* Harga Link */}
+            {/* Lanjutkan dengan pola yang sama untuk Harga, Order, Lacak, dan Kontak */}
             <NavbarLink
               href="#"
-              // active={activeItem === "Harga"}
               className={`!font-normal ${
                 isActive("/price")
-                  ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
-                  : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                  ? "rounded-lg !bg-gray-800 !text-white"
+                  : "!text-black hover:!text-black dark:!text-black"
+              } px-4 py-4 md:px-2 md:py-2`}
             >
-              {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
               <span className="flex items-center gap-x-2">
-                {" "}
-                {/* flex, items-center untuk vertikal align, gap-x-2 untuk spasi horizontal */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -167,20 +157,15 @@ export default function ClientLayout({
               </span>
             </NavbarLink>
 
-            {/* Order Link */}
             <NavbarLink
               href="#"
-              // active={activeItem === "Order"}
               className={`!font-normal ${
                 isActive("/order")
-                  ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
-                  : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                  ? "rounded-lg !bg-gray-800 !text-white"
+                  : "!text-black hover:!text-black dark:!text-black"
+              } px-4 py-4 md:px-2 md:py-2`}
             >
-              {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
               <span className="flex items-center gap-x-2">
-                {" "}
-                {/* flex, items-center untuk vertikal align, gap-x-2 untuk spasi horizontal */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -199,20 +184,15 @@ export default function ClientLayout({
               </span>
             </NavbarLink>
 
-            {/* Lacak Link */}
             <NavbarLink
               href="#"
-              // active={activeItem === "Lacak"}
               className={`!font-normal ${
                 isActive("/track")
-                  ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
-                  : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                  ? "rounded-lg !bg-gray-800 !text-white"
+                  : "!text-black hover:!text-black dark:!text-black"
+              } px-4 py-4 md:px-2 md:py-2`}
             >
-              {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
               <span className="flex items-center gap-x-2">
-                {" "}
-                {/* flex, items-center untuk vertikal align, gap-x-2 untuk spasi horizontal */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -231,20 +211,15 @@ export default function ClientLayout({
               </span>
             </NavbarLink>
 
-            {/* Kontak Link */}
             <NavbarLink
               href="#"
-              // active={activeItem === "Kontak"}
               className={`!font-normal ${
                 isActive("/contact")
-                  ? "rounded-lg !bg-gray-800 !px-4 !py-4 !text-white"
-                  : "!px-4 !py-4 !text-black hover:!text-black dark:!text-black"
-              } `}
+                  ? "rounded-lg !bg-gray-800 !text-white"
+                  : "!text-black hover:!text-black dark:!text-black"
+              } px-4 py-4 md:px-2 md:py-2`}
             >
-              {/* Bungkus ikon dan teks dalam div/span dengan flex untuk penataan */}
               <span className="flex items-center gap-x-2">
-                {" "}
-                {/* flex, items-center untuk vertikal align, gap-x-2 untuk spasi horizontal */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
