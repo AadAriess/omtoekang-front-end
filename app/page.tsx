@@ -14,8 +14,6 @@ import {
   Textarea,
   HiOutlineClipboardList,
   HiOutlineShoppingCart,
-  HiCheck,
-  HiOutlineChartBar,
   HiMail,
   HiOutlineCreditCard,
   HiOutlineFastForward,
